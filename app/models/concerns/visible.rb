@@ -13,8 +13,8 @@ module Visible
     end
   end
 
-  def public?
-    status == 'public'
+  def notpublic?
+    status != 'public'
   end
 
   def username(object)
