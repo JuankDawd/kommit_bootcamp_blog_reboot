@@ -3,22 +3,32 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
+---
+
 Things you may want to cover:
 
-* Ruby version
+- Ruby version 3.0.2
 
-* System dependencies
+---
 
-* Configuration
+## To see the deployed version: https://koomit-bootcamp-blog-jdawd.herokuapp.com
 
-* Database creation
+These were some of the topics that were explained:
+<br>
+Programming language
+<br>
 
-* Database initialization
+![Ruby](https://img.shields.io/badge/ruby-%23CC342D.svg?style=flat&logo=ruby&logoColor=white)
 
-* How to run the test suite
+<br>
+Frameworks
+<br>
 
-* Services (job queues, cache servers, search engines, etc.)
+![Rails](https://img.shields.io/badge/rails-%23CC0000.svg?style=flat&logo=ruby-on-rails&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white)
 
-* Deployment instructions
+<br>
+Versioning tools
+<br>
 
-* ...
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=flat&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=flat&logo=github&logoColor=white)

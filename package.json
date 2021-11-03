@@ -1,5 +1,6 @@
 {
   "name": "koomit-bootcamp-blog-reboot",
+  "author": "Juan Dawd <JuandawdB@gmail.com>",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
@@ -13,5 +14,12 @@
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3"
+  },
+  "scripts": {
+    "start": "rails server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JuankDawd/koomit_bootcamp_blog_reboot.git"
   }
 }
