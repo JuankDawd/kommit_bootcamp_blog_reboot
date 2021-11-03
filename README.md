@@ -11,7 +11,7 @@ Things you may want to cover:
 
 ---
 
-## To see the deployed version: https://koomit-bootcamp-blog-jdawd.herokuapp.com
+## To see the deployed version: https://koomit-bootcamp-reboot.herokuapp.com/
 
 These were some of the topics that were explained:
 <br>
@@ -32,3 +32,9 @@ Versioning tools
 
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=flat&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=flat&logo=github&logoColor=white)
+
+<br>
+Deployment
+<br>
+
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=flat&logo=heroku&logoColor=white)
