@@ -1,10 +1,11 @@
+<% relationship = Relationship.new %>
 <div class="mx-auto mt-16 text-center rounded overflow-hidden shadow-lg p-10">
   <div class="font-sans">
-    <%= link_to 'Go Back', articles_path(), class: "text-base md:text-sm text-indigo-600 font-bold flex justify-start" %>
-    <h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-3xl md:text-4xl"><%= @article.title%></h1>
-    <p class="text-sm md:text-base font-normal text-gray-600">Published <%= @article.created_at.strftime('%d %B, %Y')%></p>
+    <%= link_to "Go Back", articles_path(), class: "text-base md:text-sm text-indigo-600 font-bold flex justify-start" %>
+    <h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-3xl md:text-4xl"><%= @article.title %></h1>
+    <p class="text-sm md:text-base font-normal text-gray-600">Published <%= @article.created_at.strftime("%d %B, %Y") %></p>
     <br>
-    <p class="text-sm md:text-base font-normal text-gray-900"><%= @article.body%></p>
+    <p class="text-sm md:text-base font-normal text-gray-900"><%= @article.body %></p>
   </div>
   <% if current_user.id == @article.user_id %>
     <h2 class="mb-4 text-lg font-gray-100 italic">Article Options</h2>
@@ -23,7 +24,7 @@
         <p tabindex="0" class="focus:outline-none text-xl font-semibold leading-5 text-gray-800">Comments</p>
       </div>
       <% if @article.comments.public_count > 0 %>
-        <%=render @article.comments %>
+        <%= render @article.comments %>
       <% else %>
         <% if current_user.id == @article.user_id %>
           <p class="mb-4 text-lg font-gray-100 italic text-gray-500">
@@ -36,9 +37,23 @@
     </div>
   </div>
   <% if current_user.id != @article.user_id %>
-    <div>
-      <h2>Add a comment:</h2>
-      <%= render "comments/form" %>
-    </div>
+    <% if relationship.follow?(@article.user_id, current_user.id) %>
+      <div>
+        <h2>Follow the blogger to comment!</h2>
+        <%= form_with model: relationship do |form| %>
+          <div class="field">
+            <%= form.hidden_field :other_user, value: @article.user_id %>
+          </div>
+          <div>
+            <%= form.submit %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div>
+        <h2>Add a comment:</h2>
+        <%= render 'comments/form' %>
+      </div>
+    <% end %>
   <% end %>
 </div>
