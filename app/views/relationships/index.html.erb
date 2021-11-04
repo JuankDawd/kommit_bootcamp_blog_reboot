@@ -1,0 +1,39 @@
+<br>
+<br>
+<div class="mx-10 mt-16 text-center rounded overflow-hidden shadow-2xl ">
+  <br>
+  <h1 class="mb-4 text-3xl font-black">Following</h1>
+  <br>
+  <div class="bg-white px-4 md:px-10 pb-5 w-full">
+    <div class="overflow-x-auto flex justify-center">
+      <table class="w-1/2 border border-grey">
+        <thead class='border border-separate  border-black'>
+          <tr tabindex='0' class="focus:outline-none text-sm leading-none h-10  bg-gray-100">
+            <th class="w-1">
+              <p class="font-medium text-black text-2xl">Name</p>
+            </th>
+            <th class="w-1">
+              <p class="font-medium text-grey text-lg">Unfollow</p>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @relationships.each_with_index do |relationship, index| %>
+            <tr tabindex=<%= (index)%> class="focus:outline-none text-sm h-16 hover:bg-blue-100">
+              <td>
+                <p class="flex justify-center pl-3 text-base font-bold "><%=  User.find(relationship.followed_id).username %></p>
+              </td>
+              <td>
+                <%= link_to 'Destroy', relationship_path(relationship), class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-7  py-1 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 flex-3",method: :delete , data: { confirm: 'Are you sure?' }%>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <div class='pb-5'>
+      <%= link_to 'Go back', root_path, class: 'bg-blue-500 text-white transform hover:scale-110 motion-reduce:transform-none  hover:bg-blue-700  font-bold py-3 px-4 rounded' %>
+      <%= link_to 'Relationship', relationships_path, class: 'bg-blue-500 text-white transform hover:scale-110 motion-reduce:transform-none  hover:bg-blue-700  font-bold py-3 px-4 rounded' %>
+    </div>
+  </div>

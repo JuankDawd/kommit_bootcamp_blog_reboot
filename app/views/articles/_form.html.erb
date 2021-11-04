@@ -1,26 +1,41 @@
-<%= form_with model: article do |form| %>
-  <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-    <% article.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+<%= form_with model: article do |form|%>
+  <div class="bg-white dark:bg-gray-800">
+    <div class="container mx-auto bg-white dark:bg-gray-800 rounded">
+      <div class="xl mx-auto flex flex-col w-1/2">
+        <div class="mt-16 flex flex-col">
+          <%= form.label :title, class:"pb-2 text-sm font-bold text-blue-800 dark:text-gray-100"%>
+          <%=form.text_field :title, class: "border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 bg-transparent placeholder-gray-500 text-gray-600 dark:text-gray-400", placeholder: 'A title' %>
+          <% article.errors.full_messages_for(:title).each do |message|%>
+            <div>
+              <%= message %>
+            </div>
+          <%end%>
+        </div>
+        <div class="mt-8 flex flex-col">
+          <%= form.label :body, class: "pb-2 text-sm font-bold text-blue-800 dark:text-gray-100"%><br>
+          <%= form.text_area :body, class: "bg-transparent border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-600 dark:text-gray-400", placeholder: "Let the world know who you are", rows: 5 %>
+          <% article.errors.full_messages_for(:body).each do |message|%>
+            <div>
+              <%= message%>
+            </div>
+          <%end%>
+          <p class="w-full text-right text-xs pt-1 text-gray-600 dark:text-gray-400">Character Limit: 200</p>
+        </div>
+        <div class="mt-8 container mx-auto">
+          <div class="w-full py-4 sm:px-0 bg-white dark:bg-gray-800 flex justify-center border border-separate  border-black">
+            <%= form.label :status, class: "text-sm font-bold text-blue-800 dark:text-gray-100"%>
+            <%= form.select :status, %w[public private archived], selected: 'public', class: "block appearance-none w-full"%>
+          </div>
+        </div>
+        <br>
+        <div class="container mx-auto">
+          <div class="w-full py-4 sm:px-0 bg-white dark:bg-gray-800 flex justify-end">
+            <%= link_to 'Cancel', cancel_path, class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-6 py-2 text-xs mr-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700" , data: { confirm: 'Are you sure?' }%>
+            <%= form.submit class: 'focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-indigo-700 focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-2 text-sm'%>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %><br>
-    <% article.errors.full_messages_for(:body).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.label :status %><br>
-    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<%end%>
