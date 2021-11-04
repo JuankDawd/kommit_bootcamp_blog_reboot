@@ -6,11 +6,13 @@
     <br>
     <p class="text-sm md:text-base font-normal text-gray-900"><%= @article.body%></p>
   </div>
-  <h2 class="mb-4 text-lg font-gray-100 italic">Article Options</h2>
-  <div class="flex space-x-11 justify-center">
-    <%= link_to 'Edit', edit_article_path(@article), class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-7  py-1 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 flex-3" %>
-    <%= link_to 'Destroy', article_path(@article), class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-7  py-1 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 flex-3",method: :delete , data: { confirm: 'Are you sure?' }%>
-  </div>
+  <% if current_user.id == @article.user_id %>
+    <h2 class="mb-4 text-lg font-gray-100 italic">Article Options</h2>
+    <div class="flex space-x-11 justify-center">
+      <%= link_to "Edit", edit_article_path(@article), class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-7  py-1 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 flex-3" %>
+      <%= link_to "Destroy", article_path(@article), class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-7  py-1 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 flex-3",method: :delete , data: { confirm: "Are you sure?" } %>
+    </div>
+  <% end %>
   <br>
   <div class="container w-full md:max-w-3xl mx-auto pt-20">
     <hr class="border-b-2 border-gray-400 mb-8 mx-4">

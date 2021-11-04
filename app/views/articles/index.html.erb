@@ -13,9 +13,9 @@
             <th class="w-1">
               <p class="font-medium text-black text-2xl"> Title</p>
             </th>
-            <%# <td class="w-1">
-              <p class="pl-15"> Author</p>
-            </td> %>
+            <td class="w-1">
+              <p class="font-medium text-grey text-lg"> Author</p>
+            </td>
             <th class="w-1", title="Ammount of public comments per article">
               <p class="font-medium text-grey text-lg"> Comments</p>
             </th>
@@ -29,24 +29,72 @@
         </thead>
         <tbody>
           <% @articles.each_with_index do |article, index| %>
-            <tr tabindex=<%= (index)%> class="focus:outline-none text-sm h-16 hover:bg-blue-100">
-              <td>
-                <p class="flex justify-start pl-3 text-base font-bold "><%=  article.title %></p>
-              </td>
-              <%# <td>
-                  <p class="pl-15 text-base italic">Author Placeholder</p>
-              </td>                     %>
-              <td>
-                <p class="pl-15 text-base"><%= article.comments.public_count %></p>
-              </td>
-              <td>
-                <p class="pl-15 text-base"><%= article.created_at.strftime('%d %B, %Y')%></p>
-              </td>
-              <td>
-                <%= link_to 'Read', article, class: 'bg-blue-500 text-white transform hover:bg-blue-800  font-bold py-2 px-4 rounded' %>
-                <%# <%= button_to 'Read Article', article, method: :get, class: 'bg-blue-500 text-white transform hover:bg-blue-800  font-bold py-2 px-4 rounded' %>
-              </td>
-            </tr>
+            <% unless article.notpublic? %>
+              <tr tabindex=<%= (index)%> class="focus:outline-none text-sm h-16 hover:bg-blue-100">
+                <td>
+                  <p class="flex justify-start pl-3 text-base font-bold "><%=  article.title %></p>
+                </td>
+                <td>
+                  <p class="pl-15 text-base italic"><%= article.username(article) %></p>
+                </td>
+                <td>
+                  <p class="pl-15 text-base"><%= article.comments.public_count %></p>
+                </td>
+                <td>
+                  <p class="pl-15 text-base"><%= article.created_at.strftime('%d %B, %Y')%></p>
+                </td>
+                <td>
+                  <%= link_to 'Read', article, class: 'bg-blue-500 text-white transform hover:bg-blue-800  font-bold py-2 px-4 rounded' %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <br>
+  <hr class="border-0 bg-gray-500 text-gray-500 h-px" >
+  <br>
+  <h1 class="mb-4 text-2xl text-gray-700 font-bold italic">All of your articles</h1>
+  <br>
+  <div class="bg-white px-4 md:px-10 pb-5 w-full">
+    <div class="overflow-x-auto flex justify-center">
+      <table class="w-full border border-grey">
+        <thead class="border border-separate  border-black">
+          <tr tabindex="0" class="focus:outline-none text-sm leading-none h-10  bg-gray-100">
+            <th class="w-1">
+              <p class="font-medium text-black text-2xl"> Title</p>
+            </th>
+            <td class="w-1">
+              <p class="font-medium text-grey text-lg"> Status</p>
+            </td>
+            <th class="w-1", title="Total ammount of comments per article">
+              <p class="font-medium text-grey text-lg"> Comments</p>
+            </th>
+            <th class="w-1">
+              <p class="font-medium text-grey text-lg"> Read Article</p>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @articles.each_with_index do |article, index| %>
+            <% if article.user_id == current_user.id%>
+              <tr tabindex=<%= index %> class="focus:outline-none text-sm h-16 hover:bg-blue-100">
+                <td>
+                  <p class="flex justify-start pl-3 text-base font-bold "><%=  article.title %></p>
+                </td>
+                <td>
+                  <p class="pl-15 text-base italic"><%= article.status %></p>
+                </td>
+                <td>
+                  <p class="pl-15 text-base"><%= article.comments.count %></p>
+                </td>
+                <td>
+                  <%= link_to "Read", article, class: "bg-blue-500 text-white transform hover:bg-blue-800  font-bold py-2 px-4 rounded" %>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>
@@ -54,8 +102,7 @@
   </div>
   <br>
   <br>
-  <br>
-  <div class='pb-5'>
-    <%= link_to 'New Article', new_article_path, class: 'bg-blue-500 text-white transform hover:scale-110 motion-reduce:transform-none  hover:bg-blue-700  font-bold py-3 px-4 rounded' %>
+  <div class="pb-5">
+    <%= link_to "New Article", new_article_path, class: "bg-blue-500 text-white transform hover:scale-110 motion-reduce:transform-none  hover:bg-blue-700  font-bold py-3 px-4 rounded" %>
   </div>
 </div>
