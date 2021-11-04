@@ -11,8 +11,6 @@ module Visible
     def public_count
       where(status: 'public').count
     end
-
-  
   end
 
   def notpublic?
