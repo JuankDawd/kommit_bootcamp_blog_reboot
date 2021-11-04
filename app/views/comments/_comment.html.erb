@@ -1,16 +1,21 @@
 <% unless comment.notpublic? %>
-  <div class="mt-6 flex  items-center ">
-    <div class="">
-      <p tabindex="0" class="focus:outline-none text-sm font-semibold leading-normal text-gray-800"><%=comment.commenter%></p>
+  <div class="mt-6  ">
+    <div class="pl-3">
+      <div class="flex w-full justify-start">
+        <p  class="text-sm font-semibold text-gray-800"><%= comment.commenter %></p>
+      </div>
+      <div class="flex w-full justify-start">
+        <p  class="text-xs text-gray-500 pt-1"><%= distance_of_time_in_words comment.created_at, Time.now %></p>
+      </div>
       <br>
-      <p tabindex="0" class="focus:outline-none text-xs leading-3 text-gray-500 pt-1"><%= distance_of_time_in_words comment.created_at, Time.now%></p>
-      <br>
-      <p tabindex="0" class="focus:outline-none pt-4 text-sm leading-4 text-gray-600 ">
-        <%= comment.body%>
+      <p  class="pt-4 text-sm text-gray-600">
+        <%= comment.body %>
       </p>
-      <p>
-        <%= link_to 'Destroy Comment', [comment.article, comment], method: :delete, data: {confirm: 'Are you sure?'}%>
-      </p>
+      <% if current_user.id == comment.user_id %>
+        <p>
+          <%= link_to "Destroy Comment", [comment.article, comment], method: :delete, data: {confirm: "Are you sure?"} %>
+        </p>
+      <% end %>
     </div>
   </div>
 <% end %>
