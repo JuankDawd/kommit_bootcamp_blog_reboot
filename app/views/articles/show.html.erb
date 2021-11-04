@@ -6,11 +6,13 @@
     <br>
     <p class="text-sm md:text-base font-normal text-gray-900"><%= @article.body%></p>
   </div>
-  <h2 class="mb-4 text-lg font-gray-100 italic">Article Options</h2>
-  <div class="flex space-x-11 justify-center">
-    <%= link_to 'Edit', edit_article_path(@article), class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-7  py-1 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 flex-3" %>
-    <%= link_to 'Destroy', article_path(@article), class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-7  py-1 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 flex-3",method: :delete , data: { confirm: 'Are you sure?' }%>
-  </div>
+  <% if current_user.id == @article.user_id %>
+    <h2 class="mb-4 text-lg font-gray-100 italic">Article Options</h2>
+    <div class="flex space-x-11 justify-center">
+      <%= link_to "Edit", edit_article_path(@article), class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-7  py-1 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 flex-3" %>
+      <%= link_to "Destroy", article_path(@article), class: "bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-7  py-1 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 flex-3",method: :delete , data: { confirm: "Are you sure?" } %>
+    </div>
+  <% end %>
   <br>
   <div class="container w-full md:max-w-3xl mx-auto pt-20">
     <hr class="border-b-2 border-gray-400 mb-8 mx-4">
@@ -21,14 +23,22 @@
         <p tabindex="0" class="focus:outline-none text-xl font-semibold leading-5 text-gray-800">Comments</p>
       </div>
       <% if @article.comments.public_count > 0 %>
-        <%=render @article.comments%>
-      <%else%>
-        <p class="mb-4 text-lg font-gray-100 italic text-gray-500">Be the first one to comment!</p>
-      <%end%>
+        <%=render @article.comments %>
+      <% else %>
+        <% if current_user.id == @article.user_id %>
+          <p class="mb-4 text-lg font-gray-100 italic text-gray-500">
+            No one has commented you article yet!
+          </p>
+        <% else %>
+          <p class="mb-4 text-lg font-gray-100 italic text-gray-500">Be the first one to comment!</p>
+        <% end %>
+      <% end %>
     </div>
   </div>
-  <div>
-    <h2>Add a comment:</h2>
-    <%= render 'comments/form' %>
-  </div>
+  <% if current_user.id != @article.user_id %>
+    <div>
+      <h2>Add a comment:</h2>
+      <%= render "comments/form" %>
+    </div>
+  <% end %>
 </div>
