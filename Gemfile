@@ -39,6 +39,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Use sqlite3 as the database for localhost
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'fuubar'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
